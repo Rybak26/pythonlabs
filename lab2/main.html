@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style/style.css">
+    <title>Магазин кави</title>
+</head>
+<body>
+    <center>
+        <h1>Замовлення кави</h1>
+        <form action="cgi-bin/app.py" method="post">
+            <p>Виберіть каву:</p>
+            <input type="radio" name="coffee_type" value="Американо"> Американо
+            <input type="radio" name="coffee_type" value="Еспрессо"> Еспрессо
+            <input type="radio" name="coffee_type" value="Латте"> Латте
+            <br>
+
+            <p>Додатки:</p>
+            <input type="checkbox" name="extras" value="Цукор"> Цукор
+            <input type="checkbox" name="extras" value="Молоко"> Молоко
+            <input type="checkbox" name="extras" value="Шоколад"> Шоколад
+            <br>
+
+            <p>Кількість:</p>
+            <input type="number" name="quantity" min="1" max="10">
+            <br><br>
+
+            <input type="submit" value="Замовити">
+        </form>
+    </center>
+</body>
+</html>
