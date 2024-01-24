@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інформація про користувача</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <h1>Ласкаво просимо, {{ user_info.username }}!</h1>
+    <p>Ім'я користувача: {{ user_info.username }}</p>
+    <p id="password-label" onclick="togglePassword()">Пароль: *** Натисніть, щоб показати ***</p>
+    <script>
+        function togglePassword() {
+            var passwordLabel = document.getElementById("password-label");
+            var passwordValue = "{{ user_info.password }}"; // Замініть це значення на фактичний пароль
+
+            if (passwordLabel.textContent.includes("***")) {
+                passwordLabel.textContent = "Пароль: " + passwordValue;
+            } else {
+                passwordLabel.textContent = "Пароль: *** Натисніть, щоб показати ***";
+            }
+        }
+    </script>
+    <div class="horizontal-functions">
+        <form method="post" action="{{ url_for('add_cookie') }}">
+            {{ add_cookie_form.csrf_token }}
+            {{ add_cookie_form.hidden_tag() }}
+
+            <label for="{{ add_cookie_form.cookie_key.id }}">Ключ:</label>
+            {{ add_cookie_form.cookie_key() }}
+
+            <label for="{{ add_cookie_form.cookie_value.id }}">Значення:</label>
+            {{ add_cookie_form.cookie_value() }}
+
+            <label for="{{ add_cookie_form.cookie_expiry.id }}">Термін дії (секунди):</label>
+            {{ add_cookie_form.cookie_expiry() }}
+
+            <button type="submit">Додати куки</button>
+        </form>
+
+        <form method="post" action="{{ url_for('delete_cookie') }}" onsubmit="return confirm('Ви впевнені, що хочете видалити цю куку?');">
+            {{ delete_cookie_form.csrf_token }}
+            {{ delete_cookie_form.hidden_tag() }}
+
+            <label for="{{ delete_cookie_form.delete_cookie_key.id }}">Видалити куки (Ключ):</label>
+            {{ delete_cookie_form.delete_cookie_key() }}
+
+            <button type="submit">Видалити куки</button>
+        </form>
+
+        <form method="post" action="{{ url_for('delete_all_cookies') }}">
+            {{ delete_all_cookies_form.csrf_token }}
+            {{ delete_all_cookies_form.hidden_tag() }}
+
+            <button type="submit">Видалити всі куки</button>
+        </form>
+
+        <form method="post" action="{{ url_for('logout') }}">
+            <button type="submit">Вийти</button>
+        </form>
+
+        <div class="center-text">
+            <h3 style="color: #ffffff;">Змінити пароль</h3>
+            <form method="post" action="{{ url_for('change_password') }}">
+                {{ change_password_form.csrf_token }}
+                {{ change_password_form.hidden_tag() }}
+
+                <label for="{{ change_password_form.new_password.id }}">Новий пароль:</label>
+                {{ change_password_form.new_password() }}
+
+                <button type="submit">Змінити пароль</button>
+            </form>
+        </div>
+    </div>
+
+    <table border="1">
+        <tr>
+            <th style="color: #ffffff;">Ключ</th>
+            <th style="color: #ffffff;">Значення</th>
+            <th style="color: #ffffff;">Термін дії</th>
+            <th style="color: #ffffff;">Час створення</th>
+        </tr>
+        {% for cookie in cookies %}
+        <tr>
+            <td style="color: #ffffff;">{{ cookie.key }}</td>
+            <td style="color: #ffffff;">{{ cookie.value }}</td>
+            <td style="color: #ffffff;">{{ cookie.expiry }}</td>
+            <td style="color: #ffffff;">{{ cookie.creation_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

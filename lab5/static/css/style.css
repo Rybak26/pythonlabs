@@ -1,0 +1,109 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+}
+
+header {
+    background-color: #343a40;
+    padding: 20px;
+    color: #ffffff;
+    text-align: center;
+}
+
+h1, h3 {
+    color: #343a40;
+}
+
+p {
+    color: #343a40;
+}
+
+form {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgb(250, 246, 246);
+}
+
+label {
+    display: block;
+    margin-bottom: 1px;
+    color: #000000;
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    border: 1px solid #0071e2;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 14px;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 4px;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #343a40;
+}
+
+th, td {
+    padding: 14px;
+    text-align: left;
+}
+
+th {
+    background-color: #343a40;
+    color: white;
+}
+
+section::before {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+h1::before {
+    color: #ffffff;
+    content: "Прикарпатський університет імені Василя Стефаника";
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 10px;
+    position: relative;
+    animation: neon-glow 1.5s linear infinite;
+}
+
+@keyframes neon-glow {
+    0% {
+        text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+    }
+    50% {
+        text-shadow: 0 0 10px #ffffff, 0 0 40px #ffffff, 0 0 30px #ffffff;
+    }
+    100% {
+        text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #ffffff;
+    }
+}
+
