@@ -1,0 +1,14 @@
+{
+    "user1": {
+        "username": "artem",
+        "password": "thebest"
+    },
+    "user2": {
+        "username": "python",
+        "password": "flask"
+    },
+    "user3": {
+        "username": "dynamo",
+        "password": "kyev"
+    }
+}
