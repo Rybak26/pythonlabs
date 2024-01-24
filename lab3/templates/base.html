@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>w
+<center>
+    <header>
+    <h1>Python Lab</h1>
+        <nav>
+            <ul >
+                <li><a href="{{url_for('page1')}}">Основна сторінка</a></li>
+                <li><a href="{{url_for('page2')}}">Про мене</a></li>
+                <li><a href="{{url_for('page3')}}">Контакти</a></li>
+            </ul>
+        </nav>
+    </header>
+</center>
+<br>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+<footer>
+        OS: {{ os_info }}<br>
+        User-Agent: {{ user_agent }}<br>
+        Time: {{ current_time }}<br>
+    </footer>
+</body>
+</html>
