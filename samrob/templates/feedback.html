@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Форма відгуку</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        li button {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        li button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Форма відгуку</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <p>{{ form.name.label }}</p>
+        {{ form.name(size=20) }}
+        <p>{{ form.feedback.label }}</p>
+        {{ form.feedback(rows=4) }}
+        {{ form.csrf_token }}
+        {{ form.submit() }}
+    </form>
+
+    <h2>Відгуки:</h2>
+    <ul>
+        {% for entry in feedback_entries %}
+            <li>
+                {{ entry.name }} написав(ла): {{ entry.feedback }}
+                <form method="POST" action="{{ url_for('feedback.delete_feedback', id=entry.id) }}" style="display: inline;">
+                    {{ form.csrf_token }}
+                    <button type="submit">Видалити</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
