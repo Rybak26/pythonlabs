@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a.delete {
+            color: #e74c3c;
+        }
+
+        a.edit {
+            color: #000000;
+        }
+
+        a.add {
+            display: block;
+            background-color: #2ecc71;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        a.add:hover {
+            background-color: #030303;
+        }
+
+        .student-info {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            font-size: 12px;
+            color: #777;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .student-info p {
+            margin: 0;
+            padding: 5px;
+            color: #00ff55;
+        }
+
+        .student-info a {
+            color: #fd0000;
+            text-decoration: none;
+        }
+
+        .student-info a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <title>Todo App</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <ul>
+        {% for todo in todos %}
+            <li>
+                <span class="title">{{ todo.title }}</span> - {{ todo.description }} 
+                <a class="edit" href="{{ url_for('edit_todo', id=todo.id) }}">Edit</a>
+                <a class="delete" href="{{ url_for('delete_todo', id=todo.id) }}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a class="add" href="{{ url_for('add_todo') }}">Add Todo</a>
+
+    <div class="student-info">
+        <p style="color: #000000;">Лабораторна робота №6</p>
+        <p style="color: #000000;">Рибак Артем Іванович</p>
+        <p style="color: #000000;">GitHub: <a href="https://github.com/Rybak26" target="_blank">Нажміть на мене</a></p>
+    </div>
+</body>
+</html>
