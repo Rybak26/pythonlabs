@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Вхід{% endblock %}
+
+{% block content %}
+    <h2>Вхід</h2>
+    <form method="post" action="{{ url_for('login') }}">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.email.label(class="form-control-label") }}
+            {{ form.email(class="form-control") }}
+        </div>
+        <div>
+            {{ form.password.label(class="form-control-label") }}
+            {{ form.password(class="form-control") }}
+        </div>
+        <div>
+            {{ form.remember(class="form-check-input") }}
+            {{ form.remember.label(class="form-check-label") }} 
+        </div>
+        <div>
+            {{ form.submit(class="btn btn-primary") }}
+        </div>
+    </form>
+    <p>Не маєте акаунту? <a href="{{ url_for('register') }}">Зареєструватися</a></p>
+{% endblock %}

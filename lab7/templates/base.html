@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+     body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #f8f9fa;
+    padding-top: 80px;
+}
+
+nav {
+    background-color: #007bff;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    top: 0; /* Закріпіть верхню частину */
+}
+
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: rgb(12, 1, 1);
+            text-decoration: overline;
+        }
+
+        .navbar-toggler {
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .navbar-toggler-icon {
+            background-color: white;
+            height: 2px;
+            width: 20px;
+            display: block;
+            margin: 4px auto;
+        }
+
+        .navbar-nav {
+            margin-top: 10px;
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #007bff;
+        }
+
+        .nav-item {
+            margin-right: 20px;
+        }
+
+        .container {
+            margin: 60px auto;
+            text-align: center;
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+
+    </style>
+    <title>{% block title %}Лабораторна 7 Рибак{% endblock %}</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <a class="navbar-brand" href="#">Лабораторна 7 Рибак</a>
+            <button class="navbar-toggler" type="button" onclick="toggleNavbar()">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <ul id="navbarNav" class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('home') }}">Головна</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register') }}">Реєстрація</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('login') }}">Вхід</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-{{ messages[0].split(' ')[0] }}">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+
+    <script>
+        function toggleNavbar() {
+            var navbarNav = document.getElementById('navbarNav');
+            navbarNav.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
