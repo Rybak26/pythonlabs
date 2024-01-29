@@ -1,0 +1,41 @@
+.account-image-container {
+    width: 240px;
+    height: 240px;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.account-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+/* Add New Year's styling here */
+body {
+    background-color: #f0f0f0; /* Light gray background */
+}
+
+.navbar {
+    background-color: #1e90ff; /* Dodger blue navbar */
+}
+
+.navbar-brand, .nav-link {
+    color: #fff !important; /* White text */
+}
+
+.display-4 {
+    color: #1e90ff; /* Dodger blue heading */
+}
+
+.container {
+    background-color: #fff; /* White container background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.alert {
+    margin-top: 15px;
+}
+
+/* Add any additional New Year's styling as needed */
