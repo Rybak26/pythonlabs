@@ -1,0 +1,78 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>11 lab Rybak</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffcc00;">
+        <a class="navbar-brand" style="color: #4a148c; font-weight: bold;">11 lab Rybak</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #4a148c;" href="{{ url_for('posts.add_post') }}">Make post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #4a148c;" href="{{ url_for('posts.posts') }}">Post feed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #4a148c;" href="{{ url_for('posts.my_posts') }}">My posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #4a148c;" href="{{ url_for('todos.todolist') }}">Todo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #4a148c;" href="{{ url_for('main.index') }}">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #4a148c;" href="{{ url_for('auth.logout') }}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #4a148c;" href="{{ url_for('auth.login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #4a148c;" href="{{ url_for('auth.register') }}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <br>
+
+    <div class="text-center">
+        {% if current_user.is_authenticated %}
+            <p class="display-4" style="color: #4a148c;">🎉 Привітик, {{ current_user.username }}! 🎉</p>
+        {% else %}
+            <p class="display-4" style="color: #4a148c;">🎉 11 лабораторна робота Рибака Артема 🎉</p>
+        {% endif %}
+    </div>
+
+    <div class="container mt-4" style="background-color: #ffffff; border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert" style="background-color: #ffee58; color: #4a148c;">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

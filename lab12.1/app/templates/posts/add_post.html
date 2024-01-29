@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-4">Add Post</h1>
+    <br>
+    <form method="POST" action="{{ url_for('posts.add_post') }}" class="mt-3" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Title:</label>
+            {{ form.title(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="text" class="form-label">Text:</label>
+            {{ form.text(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Image:</label>
+            {{ form.image(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="type" class="form-label">Type:</label>
+            {{ form.type(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="category" class="form-label">Category:</label>
+            {{ form.category(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            <label for="category" class="form-label">Tags:</label>
+            <div class="input-group">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    Select Tags
+                </button>
+                <div class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
+                    {% for tag_id, tag_name in form.tags.choices %}
+                        <div class="dropdown-item">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="tag{{ tag_id }}" name="tags"
+                                       value="{{ tag_id }}">
+                                <label class="form-check-label" for="tag{{ tag_id }}">{{ tag_name }}</label>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+    <br><br>
+</div>
+{% endblock %}
