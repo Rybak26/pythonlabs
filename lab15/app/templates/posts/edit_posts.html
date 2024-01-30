@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Edit Post</h1>
+    <br>
+    <form method="POST" action="{{ url_for('posts.edit_post', id=post.id) }}" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+            <label for="title">Title:</label>
+            {{ form.title(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label for="text">Text:</label>
+            {{ form.text(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label for="image">Image:</label>
+            {{ form.image(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label for="type">Type:</label>
+            {{ form.type(class="form-control") }}
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category:</label>
+            {{ form.category(class="form-control") }}
+        </div>
+
+        <div class="form-group mr-3">
+            <label for="category">Tags:</label>
+
+            <div class="input-group">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    Select Tags
+                </button>
+                <div class="dropdown-menu" style="max-height: 200px; overflow-y: auto;">
+                    {% for tag_id, tag_name in form.tags.choices %}
+                    <div class="dropdown-item">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="tag{{ tag_id }}" name="tags"
+                                   value="{{ tag_id }}"
+                                   {% if tag_id in post.tags|map(attribute='id' ) %}checked{% endif %}>
+                            <label class="form-check-label" for="tag{{ tag_id }}">{{ tag_name }}</label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        {{ form.submit(class="btn btn-success") }}
+    </form>
+</div>
+{% endblock %}

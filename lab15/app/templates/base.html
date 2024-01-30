@@ -1,0 +1,206 @@
+
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Лабораторна 15</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+    background-color: #f0f0f0; /* Light gray background */
+}
+
+.navbar-light {
+    background-color: #ffffff !important; /* White navbar background */
+}
+
+.navbar-brand {
+    font-family: 'Lobster', cursive;
+    font-size: 2em;
+    color: #e44d26; /* New Year's App brand color */
+}
+
+.navbar-toggler-icon {
+    background-color: #e44d26; /* Toggler icon color */
+}
+
+.navbar-nav .nav-link {
+    font-weight: bold;
+    color: #e44d26; /* Navbar links color */
+}
+
+.container {
+    background-color: #ffffff; /* White container background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+    padding: 20px;
+}
+
+.display-4 {
+    font-family: 'Pacifico', cursive;
+}
+
+.alert {
+    border-radius: 5px;
+}
+
+.text-success {
+    color: #28a745 !important; /* Success text color */
+}
+
+.text-info {
+    color: #007bff !important; /* Info text color */
+}
+.navbar {
+    border-bottom: 2px solid #e44d26; /* Оранжевий колір границі navbar */
+}
+
+.navbar-nav .nav-link {
+    transition: color 0.3s; /* Плавна зміна кольору посилань */
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ff8c00; /* Оранжевий колір посилань при наведенні */
+}
+
+.container {
+    margin-top: 30px; /* Збільшення відступу від навбару */
+}
+
+.display-4 {
+    text-shadow: 2px 2px 4px #e44d26; /* Тінь для заголовку */
+}
+
+.alert {
+    box-shadow: 0 4px 8px rgba(228, 77, 38, 0.2); /* Зміна тіні для повідомлень */
+}
+
+/* Стилі для кнопок */
+.btn-primary {
+    background-color: #e44d26;
+    border-color: #e44d26;
+}
+
+.btn-primary:hover {
+    background-color: #ff8c00;
+    border-color: #ff8c00;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #218838;
+}
+
+/* Стилі для посилань */
+a {
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #0056b3;
+}
+.glow {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    transition: color 0.3s;
+}
+
+.glow:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, #ff8c00, transparent);
+    transition: left 0.5s ease-in-out;
+}
+
+.glow:hover {
+    color: #ff8c00; /* Колір посилань при наведенні */
+}
+
+.glow:hover:before {
+    left: 100%;
+}
+    </style>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand">Лабораторна робота 15</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link glow" href="{{ url_for('posts.add_post') }}">Create post</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link glow" href="{{ url_for('posts.posts') }}">Post feed</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link glow" href="{{ url_for('posts.my_posts') }}">My posts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link glow" href="{{ url_for('todos.todolist') }}">Todo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link glow" href="{{ url_for('main.index') }}">Account</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link glow" href="{{ url_for('auth.logout') }}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link glow" href="{{ url_for('auth.login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link glow" href="{{ url_for('auth.register') }}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+        
+    <br>
+
+    <div class="text-center">
+        {% if current_user.is_authenticated %}
+            <p class="display-4 text-success">Здоров, {{ current_user.username }}!</p>
+        {% else %}
+            <p class="display-4 text-info">Рибак Артем Іванович</p>
+        {% endif %}
+    </div>
+
+    <div class="container mt-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}
+        {% endblock %}
+        <div class="text-center">
+            <img src="https://www.python.org/static/community_logos/python-logo-master-v3-TM.png" alt="Python Logo" style="max-width: 100%; height: auto;">
+        </div>
+    </div>
+</body>
+</html>
