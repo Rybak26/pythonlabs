@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1 class="mt-4">Todo List</h1>
+    <br>
+    <ul class="list-group">
+        {% for todo in todos %}
+            <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h3 class="mb-1">{{ todo.title }}</h3>
+                        <p class="mb-1">{{ todo.description }}</p>
+
+                        {% if todo.completed %}
+                            <p class="text-success">Completed: Yes</p>
+                        {% else %}
+                            <p class="text-danger">Completed: No</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="actions">
+                        <a href="{{ url_for('todos.edit_todo', id=todo.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ url_for('todos.delete_todo', id=todo.id) }}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('todos.add_todo') }}" class="btn btn-primary mt-3">Add Todo</a>
+{% endblock %}

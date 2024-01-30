@@ -1,0 +1,13 @@
+.account-image-container {
+        width: 240px;
+        height: 240px;
+        overflow: hidden;
+        display: inline-block;
+    }
+
+    .account-image {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        display: block;
+    }
